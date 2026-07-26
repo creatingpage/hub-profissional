@@ -42,6 +42,13 @@
         }
 
         /* RESET E BASE */
+        html {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden !important;
+            position: relative;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -550,7 +557,7 @@
             <div class="bento-grid">
                 
                 <!-- Card Visual 1 -->
-                <a href="https://api.whatsapp.com/send?phone=5534997795810&text=Vim%20pelas%20placas%20de%20avalia%C3%A7%C3%A3o%2C%20tenho%20interesse%2C%20pode%20me%20ajudar%3F" target="_blank" rel="noopener noreferrer" class="card card-visual">
+                <a href="https://api.whatsapp.com/send?phone=5534997795810&text=Vim%20pelas%20placas%20de%20avalia%C3%A7%C3%A3o%2C%20tenho%20interesse%2C%20pode%20me%20ajudar%3F" target="_blank" rel="noopener noreferrer" class="card card-visual bento-full">
                     <div class="card-content">
                         <div class="image-placeholder">
                             <img src="assets/placa-nfc-google.webp" alt="Placas de Avaliação do Google ou Personalizadas por Aproximação" loading="lazy" decoding="async">
@@ -562,8 +569,8 @@
                     </div>
                 </a>
 
-                <!-- Card Visual 2 -->
-                <a href="#" class="card card-visual">
+                <!-- Card Visual 2 (oculto) -->
+                <a href="#" class="card card-visual" style="display: none !important;">
                     <div class="card-content">
                         <div class="image-placeholder preview-glass-bg">
                             <div class="preview-glass">
