@@ -416,6 +416,19 @@
             color: var(--cyan);
         }
 
+        /* ESTADO DE REDIRECIONAMENTO (MICRO-ANIMAÇÃO) */
+        .btn-redirecting {
+            transform: scale(0.97) !important;
+            box-shadow: 0 0 24px rgba(0, 210, 255, 0.5), 0 0 60px rgba(0, 210, 255, 0.15) !important;
+            transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+            cursor: default;
+        }
+
+        #vcard-btn {
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+
         /* FOOTER DE AUTORIDADE */
         footer {
             margin-top: 2rem;
@@ -638,13 +651,28 @@ END:VCARD`;
                     feedbackVisual(vcardBtn);
                 });
 
-                vcardBtn.addEventListener('touchend', (e) => {
+
+            }
+
+            // 3. SISTEMA DE MICRO-ANIMAÇÃO PRÉ-REDIRECIONAMENTO
+            document.querySelectorAll('a.card').forEach(link => {
+                const url = link.getAttribute('href');
+                if (!url || url === '#' || url === '') return;
+
+                link.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
-                    gerarVCard();
-                    feedbackVisual(vcardBtn);
+
+                    this.classList.add('btn-redirecting');
+
+                    setTimeout(() => {
+                        const win = window.open(url, '_blank');
+                        if (!win || win.closed || typeof win.closed === 'undefined') {
+                            window.location.href = url;
+                        }
+                    }, 350);
                 });
-            }
+            });
         });
     </script>
 </body>
