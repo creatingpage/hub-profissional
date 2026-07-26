@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>João Marcelo Bruno | Executive Hub B2B</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Parametrizado e Componentizado */
+        :root {
+            /* Cores e Fundo */
+            --bg-color: #06080D;
+            --card-bg: rgba(13, 18, 30, 0.60);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --card-border-hover: rgba(255, 255, 255, 0.15);
+            --text-primary: #FFFFFF;
+            --text-secondary: #9BA3AF;
+            --text-muted: rgba(255, 255, 255, 0.4);
+            
+            /* Destaques (Orbs, Gradientes) */
+            --cyan: #00D2FF;
+            --navy: #0052D4;
+            --status-green: #00FF66;
+            
+            /* Tipografia */
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            
+            /* Medidas e Grid */
+            --container-max: 680px;
+            --gap-md: 16px;
+            --gap-lg: 32px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            
+            /* Efeitos */
+            --glass-blur: blur(16px);
+            --hover-trans-y: translateY(-3px);
+            --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* RESET E BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: linear-gradient(180deg, rgba(6, 8, 13, 0.85) 0%, rgba(6, 8, 13, 0.95) 100%), url('assets/fundo-tech.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            min-height: 100vh;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+            padding: 3rem 16px;
+        }
+
+        /* ORBS ABSTRATOS DE LUZ (FUNDO ANIMADO) */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.5;
+            animation: float 10s ease-in-out infinite alternate;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--cyan);
+            top: -100px;
+            left: -150px;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: var(--navy);
+            bottom: -150px;
+            right: -200px;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 40px) scale(1.1); }
+        }
+
+        /* CONTAINER PRINCIPAL */
+        .container {
+            width: 100%;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap-lg);
+            z-index: 1;
+        }
+
+        /* HEADER EXECUTIVO */
+        .header-executivo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            animation: fadeDown 0.8s ease-out forwards;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(135deg, var(--cyan), var(--navy));
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 82, 212, 0.2);
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: var(--bg-color);
+            border: 3px solid var(--bg-color);
+        }
+
+        .status-dot-avatar {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 22px;
+            height: 22px;
+            background-color: var(--status-green);
+            border-radius: 50%;
+            border: 4px solid var(--bg-color);
+            box-shadow: 0 0 12px var(--status-green);
+        }
+
+        .header-executivo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-executivo .bio {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+            max-width: 90%;
+            margin-bottom: 1.25rem;
+            font-weight: 400;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 255, 102, 0.05);
+            border: 1px solid rgba(0, 255, 102, 0.15);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--status-green);
+            font-weight: 500;
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+        }
+
+        .status-pulse {
+            width: 8px;
+            height: 8px;
+            background-color: var(--status-green);
+            border-radius: 50%;
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(0, 255, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0); }
+        }
+
+        /* GRID E CARDS BENTO */
+        .section-title {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: var(--gap-md);
+            padding-left: 0.5rem;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--gap-md);
+            width: 100%;
+        }
+
+        .bento-full {
+            grid-column: 1 / -1;
+        }
+
+        @media (max-width: 500px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* COMPONENTE: CARD GLASSMORPHISM */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card:hover {
+            transform: var(--hover-trans-y);
+            border-color: var(--card-border-hover);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        /* ILUMINAÇÃO DINÂMICA (MOUSE TRACKING JS) */
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(
+                600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(255, 255, 255, 0.06),
+                transparent 40%
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+            pointer-events: none; /* Deixa o card pegar os clicks */
+        }
+
+        /* ESTILOS INTERNOS DOS CARDS */
+        .card-master {
+            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(0,210,255,0.05) 100%);
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+        }
+
+        .card-master:hover {
+            border-color: rgba(0, 210, 255, 0.4);
+            box-shadow: 0 12px 40px rgba(0, 210, 255, 0.15);
+        }
+
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .icon-arrow {
+            font-size: 1.5rem;
+            color: var(--cyan);
+            transform: rotate(-45deg);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .icon-arrow {
+            transform: rotate(-45deg) translate(3px, -3px);
+        }
+
+        /* CARDS COM IMAGEM (PRODUTOS TANGÍVEIS) */
+        .card-visual {
+            padding: 0; /* padding zero para a imagem colar nas bordas */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        
+        .card-visual .image-placeholder {
+            width: 100%;
+            height: 180px;
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-visual .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .card-visual:hover .image-placeholder img {
+            transform: scale(1.05);
+        }
+
+        /* Preview Glassmorphism para imagem não definida */
+        .preview-glass-bg {
+            background: linear-gradient(145deg, rgba(255,255,255,0.02) 0%, rgba(0,210,255,0.03) 100%) !important;
+        }
+
+        .preview-glass {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            transition: var(--transition-smooth);
+        }
+
+        .preview-glass .preview-icon {
+            width: 36px;
+            height: 36px;
+            fill: var(--text-muted);
+            opacity: 0.6;
+            transition: var(--transition-smooth);
+        }
+
+        .preview-glass .preview-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 1.4;
+            opacity: 0.7;
+        }
+
+        .card-visual:hover .preview-glass {
+            border-color: rgba(0, 210, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .card-visual:hover .preview-glass .preview-icon {
+            fill: var(--cyan);
+            opacity: 0.9;
+            transform: scale(1.1);
+        }
+
+        .card-visual .visual-content {
+            padding: 1.25rem;
+        }
+
+        /* CARDS PEQUENOS (UTILITÁRIOS) */
+        .card-icon-top {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--cyan);
+        }
+
+        /* FOOTER DE AUTORIDADE */
+        footer {
+            margin-top: 2rem;
+            text-align: center;
+            animation: fadeInUp 1s ease-out forwards;
+            opacity: 0;
+            padding-bottom: 2rem;
+        }
+
+        .footer-signature {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 1.5px;
+        }
+
+        /* ANIMAÇÕES GERAIS */
+        .animate-up {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Orbs de fundo -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="container">
+        
+        <!-- 1. HEADER EXECUTIVO -->
+        <header class="header-executivo">
+            <div class="avatar-wrapper">
+                <!-- Imagem de perfil -->
+                <img src="assets/avatar.jpg" alt="João Marcelo Bruno" class="avatar" loading="lazy" decoding="async">
+                <div class="status-dot-avatar"></div>
+            </div>
+            <h1>João Marcelo Bruno</h1>
+            <p class="bio">Transformando ideias em código e negócios em máquinas autônomas de vendas.</p>
+            <div class="status-badge">
+                <div class="status-pulse"></div>
+                Disponível para Projetos & Consultorias B2B
+            </div>
+        </header>
+
+        <!-- 2. BLOCO A: MASTER CTA -->
+        <section class="animate-up delay-1">
+            <a href="https://meu-portfolio-ten-ivory.vercel.app" target="_blank" rel="noopener noreferrer" class="card card-master">
+                <div class="card-content flex-between">
+                    <div>
+                        <h2 class="card-title">Conheça Meu Portfólio & Visão Estratégica</h2>
+                        <p class="card-desc">Veja como trabalho e penso estrategicamente para que sua empresa tenha uma engenharia forte e um planejamento comercial perfeitamente estruturado.</p>
+                    </div>
+                    <div class="icon-arrow">➔</div>
+                </div>
+            </a>
+        </section>
+
+        <!-- 3. BLOCO B: ECOSSISTEMA TÉCNICO & VALIDAÇÃO -->
+        <section class="animate-up delay-2">
+            <h3 class="section-title">Engenharia & Contato Direto</h3>
+            <div class="bento-grid">
+                
+                <!-- GitHub Ecosystem (Full width on mobile, 1 col on desktop if odd, or mixed) -->
+                <!-- Nesse caso, GitHub fica full width -->
+                <a href="https://github.com/creatingpage" target="_blank" rel="noopener noreferrer" class="card bento-full">
+                    <div class="card-content flex-between">
+                        <div>
+                            <div class="card-icon-top" style="margin-bottom:0.2rem">
+                                <!-- GitHub SVG nativo -->
+                                <svg style="width: 28px; fill: var(--text-primary);" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                            </div>
+                            <h4 class="card-title">GitHub Ecosystem</h4>
+                            <p class="card-desc">Inspecione minhas arquiteturas de software e repositórios open-source.</p>
+                        </div>
+                        <div class="icon-arrow">➔</div>
+                    </div>
+                </a>
+
+                <!-- vCard 1-Click -->
+                <div class="card" id="vcard-btn">
+                    <div class="card-content">
+                        <div class="card-icon-top">📇</div>
+                        <h4 class="card-title">Salvar Contato</h4>
+                        <p class="card-desc">Adicionar à agenda (vCard 1-Click).</p>
+                    </div>
+                </div>
+
+                <!-- WhatsApp Direct -->
+                <a href="https://api.whatsapp.com/send?phone=5534997795810&text=Ol%C3%A1%2C%20Jo%C3%A3o%20Marcelo!%20Acessei%20seu%20Hub%20Executivo%20e%20gostaria%20de%20agendar%20uma%20conversa%20para%20entender%20como%20podemos%20estruturar%20a%20engenharia%20e%20o%20planejamento%20comercial%20da%20minha%20empresa." target="_blank" rel="noopener noreferrer" class="card">
+                    <div class="card-content">
+                        <div class="card-icon-top" style="color: #25D366;">💬</div>
+                        <h4 class="card-title">WhatsApp Direct</h4>
+                        <p class="card-desc">Fale diretamente sobre projetos B2B.</p>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- 4. BLOCO C: VITRINE DE PRODUTOS TANGÍVEIS -->
+        <section class="animate-up delay-3">
+            <h3 class="section-title">Soluções & Produtos Tangíveis</h3>
+            <div class="bento-grid">
+                
+                <!-- Card Visual 1 -->
+                <a href="https://api.whatsapp.com/send?phone=5534997795810&text=Vim%20pelas%20placas%20de%20avalia%C3%A7%C3%A3o%2C%20tenho%20interesse%2C%20pode%20me%20ajudar%3F" target="_blank" rel="noopener noreferrer" class="card card-visual">
+                    <div class="card-content">
+                        <div class="image-placeholder">
+                            <img src="assets/placa-nfc-google.webp" alt="Placas de Avaliação do Google ou Personalizadas por Aproximação" loading="lazy" decoding="async">
+                        </div>
+                        <div class="visual-content">
+                            <h4 class="card-title">Placas de Avaliação do Google ou Personalizadas por Aproximação</h4>
+                            <p class="card-desc">Aumente suas avaliações no Google e impulsione suas vendas com tecnologia de aproximação NFC. Tenha sua placa 100% personalizada com a sua marca e identidade visual.</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Card Visual 2 -->
+                <a href="#" class="card card-visual">
+                    <div class="card-content">
+                        <div class="image-placeholder preview-glass-bg">
+                            <div class="preview-glass">
+                                <svg class="preview-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+                                <span class="preview-label">Design Preview / Imagem em Breve</span>
+                            </div>
+                        </div>
+                        <div class="visual-content">
+                            <h4 class="card-title">Cartões Executivos NFC Metalizados</h4>
+                            <p class="card-desc">Sua presença executiva resumida em um toque de alta tecnologia B2B.</p>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- 5. RODAPÉ DE AUTORIDADE -->
+        <footer>
+            <div class="footer-signature">ENGINEERED BY JOÃO MARCELO BRUNO • 2026</div>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPTS VANILLA JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. ILUMINAÇÃO DINÂMICA (MOUSE TRACKING PARA GLASSMORPHISM)
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    // Passa as coordenadas X e Y como variáveis CSS para o efeito ::before do card
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                });
+            });
+
+            // 2. GERAÇÃO E DOWNLOAD INSTANTÂNEO DO vCARD (.vcf) CORRIGIDO
+            const vcardBtn = document.getElementById('vcard-btn');
+            const vcardOriginalHTML = vcardBtn ? vcardBtn.innerHTML : '';
+
+            if (vcardBtn) {
+                function gerarVCard() {
+                    const vCardData =
+`BEGIN:VCARD
+VERSION:3.0
+N:Bruno;João Marcelo;;;
+FN:João Marcelo Bruno
+TEL;TYPE=CELL,VOICE:+5534997795810
+TITLE:Engenheiro de Software & Consultor B2B
+URL:https://meu-portfolio-ten-ivory.vercel.app
+NOTE:Acessei via Cartão Metalizado NFC
+END:VCARD`;
+
+                    const blob = new Blob([vCardData], { type: 'text/vcard;charset=utf-8' });
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'Joao_Marcelo_Bruno.vcf';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                }
+
+                function feedbackVisual(btn) {
+                    btn.style.pointerEvents = 'none';
+                    btn.innerHTML = '<div class="card-content" style="text-align:center"><div class="card-icon-top">✅</div><h4 class="card-title" style="color:var(--status-green)">Contato Baixado!</h4><p class="card-desc">Adicionado à sua agenda</p></div>';
+                    setTimeout(() => {
+                        btn.innerHTML = vcardOriginalHTML;
+                        btn.style.pointerEvents = '';
+                    }, 2000);
+                }
+
+                vcardBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    gerarVCard();
+                    feedbackVisual(vcardBtn);
+                });
+
+                vcardBtn.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    gerarVCard();
+                    feedbackVisual(vcardBtn);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
